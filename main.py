@@ -53,6 +53,15 @@ while True:
                 print(f"{i + 1}. {lista_productos[i][0].capitalize()} - {lista_productos[i][1].capitalize()} - ${lista_productos[i][2]}")
 
         case "3":
+            producto_buscado = input("Ingrese el nombre del producto que desea buscar: ").lower().strip()
+            encontrado = False
+            for producto in lista_productos:
+                if producto[0] == producto_buscado:
+                    print(f"Producto encontrado: {producto[0].capitalize()} - {producto[1].capitalize()} - ${producto[2]}")
+                    encontrado = True
+                    break
+            if not encontrado:
+                print(f"Producto '{producto_buscado}' no encontrado en la lista.")
 
         case "4":
             for i in range(len(lista_productos)):
@@ -64,7 +73,7 @@ while True:
                 numero_producto = int(numero_producto)
                 if numero_producto >= 1 and numero_producto <= len(lista_productos):
                     producto_eliminado = lista_productos.pop(numero_producto - 1)
-                    print(f"Producto '{producto_eliminado[0]}' eliminado exitosamente.")
+                    print(f"Producto '{producto_eliminado[0].upper()}' eliminado exitosamente.")
                 else:
                     print("Número de producto inválido.")
             else:
