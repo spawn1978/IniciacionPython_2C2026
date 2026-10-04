@@ -8,7 +8,9 @@ lista_productos = [
 ]    
 
 while True:
-    print("Sistema de Gestión de Productos".upper())
+    print("===================================")
+    print("| Sistema de Gestión de Productos |".upper())
+    print("===================================")
     print("1. Agregar producto")
     print("2. Mostrar productos")
     print("3. Buscar producto")
@@ -37,7 +39,7 @@ while True:
             precio = int(precio)  # Convertir el precio a entero después de la validación
 
             producto = [nombre, categoria, precio]  
-            lista_productos.append(producto)1
+            lista_productos.append(producto)
 
             print(f"Producto '{nombre}' agregado exitosamente.")
             print(lista_productos)  # Mostrar la lista de productos después de agregar uno nuevo
@@ -49,7 +51,15 @@ while True:
 
         case "4":
             for i in range(len(lista_productos)):
-                print(f"{i + 1}. {lista_productos[i][0]} - {lista_productos[i][1]} - {lista_productos[i][2]}")
+                print(f"{i + 1}. {lista_productos[i][0].capitalize()} - {lista_productos[i][1].capitalize()} - ${lista_productos[i][2]}")
+
+                numero_producto = input("Ingrese el número del producto que desea eliminar: ")
+                while not numero_producto.isdigit() or int(numero_producto) < 1 or int(numero_producto) > len(lista_productos):
+                    print("Número de producto inválido. Por favor, ingrese un número válido.")
+                    numero_producto = input("Ingrese el número del producto que desea eliminar: ")
+
+                producto_eliminado = lista_productos.pop(int(numero_producto) - 1)
+                print(f"Producto '{producto_eliminado[0]}' eliminado exitosamente.")
 
         case "5": 
             print("Saliendo del sistema...")
