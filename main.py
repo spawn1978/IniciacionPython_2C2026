@@ -1,3 +1,13 @@
+#!/usr/bin/env python3
+# Sistema de Gestión de Productos
+
+"""
+Nombre del Módulo: main.py
+Descripción: Este script agrega productos, visualiza productos, busca productos y elimina productos de una lista.
+Autor: Carlos Leguizmaon
+Fecha de Creación: 2026-10-04
+Versión: 1.0.0
+"""
 
 
 
@@ -44,7 +54,6 @@ while True:
             print(f"Producto '{nombre}' agregado exitosamente.")
             print(lista_productos)  # Mostrar la lista de productos después de agregar uno nuevo
 
-
         case "2":
             print("======================")    
             print("| Lista de productos |".upper())
@@ -79,7 +88,6 @@ while True:
             else:
                 print("Debe ingresar un número válido.")
            
-
         case "5": 
             print("Saliendo del sistema...")
             break
