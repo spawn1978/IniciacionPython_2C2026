@@ -3,7 +3,7 @@
 
 """
 Nombre del Módulo: main.py
-Descripción: Este script agrega productos, visualiza productos, busca productos y elimina productos de una lista.
+Descripción: Este script agrega, visualiza, busca y elimina productos de una lista.
 Autor: Carlos Leguizmaon
 Fecha de Creación: 2026-10-04
 Versión: 1.0.0
