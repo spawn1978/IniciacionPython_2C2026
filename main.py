@@ -45,21 +45,31 @@ while True:
             print(lista_productos)  # Mostrar la lista de productos después de agregar uno nuevo
 
 
-        # case "2":
+        case "2":
+            print("======================")    
+            print("| Lista de productos |".upper())
+            print("======================")    
+            for i in range(len(lista_productos)):
+                print(f"{i + 1}. {lista_productos[i][0].capitalize()} - {lista_productos[i][1].capitalize()} - ${lista_productos[i][2]}")
 
-        # case "3":
+        case "3":
 
         case "4":
             for i in range(len(lista_productos)):
                 print(f"{i + 1}. {lista_productos[i][0].capitalize()} - {lista_productos[i][1].capitalize()} - ${lista_productos[i][2]}")
+                ## Verificar, solo muestra el primer producto de la lista!!.
+            numero_producto = input("Ingrese el número del producto que desea eliminar: ")
 
-                numero_producto = input("Ingrese el número del producto que desea eliminar: ")
-                while not numero_producto.isdigit() or int(numero_producto) < 1 or int(numero_producto) > len(lista_productos):
-                    print("Número de producto inválido. Por favor, ingrese un número válido.")
-                    numero_producto = input("Ingrese el número del producto que desea eliminar: ")
-
-                producto_eliminado = lista_productos.pop(int(numero_producto) - 1)
-                print(f"Producto '{producto_eliminado[0]}' eliminado exitosamente.")
+            if numero_producto.isdigit():
+                numero_producto = int(numero_producto)
+                if numero_producto >= 1 and numero_producto <= len(lista_productos):
+                    producto_eliminado = lista_productos.pop(numero_producto - 1)
+                    print(f"Producto '{producto_eliminado[0]}' eliminado exitosamente.")
+                else:
+                    print("Número de producto inválido.")
+            else:
+                print("Debe ingresar un número válido.")
+           
 
         case "5": 
             print("Saliendo del sistema...")
