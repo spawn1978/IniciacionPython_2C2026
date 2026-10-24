@@ -1,4 +1,4 @@
-def agregar_productos():
+def agregar_productos(lista):
     nombre = input("Ingrese el nombre del producto: ").lower().strip()
     while nombre == "": 
         print("El nombre del producto no puede estar vacío y debe contener solo letras.")
@@ -17,10 +17,10 @@ def agregar_productos():
     precio = int(precio)  # Convertir el precio a entero después de la validación
                     
     producto = [nombre, categoria, precio]  
-    lista_productos.append(producto)
+    lista.append(producto)
                     
     print(f"Producto '{nombre}' agregado exitosamente.")
-    print(lista_productos)  # Mostrar la lista de productos después de agregar uno nuevo
+    print(lista)  # Mostrar la lista de productos después de agregar uno nuevo
 """                       
 def mostrar_productos():
     print("======================")    

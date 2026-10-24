@@ -9,7 +9,7 @@ Fecha de Creación: 2026-10-04
 Versión: 1.0.0
 """
 
-from funciones import agregar_productos, mostrar_productos, buscar_producto, eliminar_producto
+from funciones import agregar_productos
 
 lista_productos = [
     ["manazana", "fruta", 1000],
@@ -31,7 +31,7 @@ while True:
 
     match opcion:
         case "1": # Agregar producto
-            agregar_producto(lista_productos)
+            agregar_productos(lista_productos)
             print(lista_productos)  # Mostrar la lista actualizada después de agregar un producto
             
         case "2":
