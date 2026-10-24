@@ -9,7 +9,7 @@ Fecha de Creación: 2026-10-04
 Versión: 1.0.0
 """
 
-from funciones import agregar_producto, mostrar_productos, buscar_producto, eliminar_producto
+from funciones import agregar_productos, mostrar_productos, buscar_producto, eliminar_producto
 
 lista_productos = [
     ["manazana", "fruta", 1000],
