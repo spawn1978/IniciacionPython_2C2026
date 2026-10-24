@@ -40,24 +40,24 @@ def buscar_producto():
         if not encontrado:
             print(f"Producto '{producto_buscado}' no encontrado en la lista.")
 
-"""
+
 def eliminar_producto():
-    for i in range(len(lista_productos)):
-        print(f"{i + 1}. {lista_productos[i][0].capitalize()} - {lista_productos[i][1].capitalize()} - ${lista_productos[i][2]}")
+    for i in range(len(lista)):
+        print(f"{i + 1}. {lista[i][0].capitalize()} - {lista[i][1].capitalize()} - ${lista  [i][2]}")
         ## Verificar, solo muestra el primer producto de la lista!!.
     numero_producto = input("Ingrese el número del producto que desea eliminar: ")
     
     if numero_producto.isdigit():
         numero_producto = int(numero_producto)
-        if numero_producto >= 1 and numero_producto <= len(lista_productos):
-            producto_eliminado = lista_productos.pop(numero_producto - 1)
+        if numero_producto >= 1 and numero_producto <= len(lista):
+            producto_eliminado = lista.pop(numero_producto - 1)
             print(f"Producto '{producto_eliminado[0].upper()}' eliminado exitosamente.")
         else:
             print("Número de producto inválido.")
     else:
         print("Debe ingresar un número válido.")
 
-
+"""
 case "1": # Agregar producto
             nombre = input("Ingrese el nombre del producto: ").lower().strip()
             while nombre == "": 
