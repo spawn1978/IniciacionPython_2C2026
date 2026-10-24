@@ -9,7 +9,7 @@ Fecha de Creación: 2026-10-04
 Versión: 1.0.0
 """
 
-from funciones import agregar_productos
+from funciones import agregar_productos, mostrar_productos
 
 lista_productos = [
     ["manazana", "fruta", 1000],
@@ -35,12 +35,9 @@ while True:
             print(lista_productos)  # Mostrar la lista actualizada después de agregar un producto
             
         case "2":
-            print("======================")    
-            print("| Lista de productos |".upper())
-            print("======================")    
-            for i in range(len(lista_productos)):
-                print(f"{i + 1}. {lista_productos[i][0].capitalize()} - {lista_productos[i][1].capitalize()} - ${lista_productos[i][2]}")
-
+            # Mostrar productos
+            mostrar_productos(lista_productos)
+            
         case "3":
             producto_buscado = input("Ingrese el nombre del producto que desea buscar: ").lower().strip()
             encontrado = False

@@ -21,18 +21,18 @@ def agregar_productos(lista):
                     
     print(f"Producto '{nombre}' agregado exitosamente.")
     print(lista)  # Mostrar la lista de productos después de agregar uno nuevo
-"""                       
-def mostrar_productos():
+                     
+def mostrar_productos(lista):
     print("======================")    
     print("| Lista de productos |".upper())
     print("======================")    
-    for i in range(len(lista_productos)):
-        print(f"{i + 1}. {lista_productos[i][0].capitalize()} - {lista_productos[i][1].capitalize()} - ${lista_productos[i][2]}")
+    for i in range(len(lista)):
+        print(f"{i + 1}. {lista[i][0].capitalize()} - {lista[i][1].capitalize()} - ${lista  [i][2]}")
 
 def buscar_producto():
     producto_buscado = input("Ingrese el nombre del producto que desea buscar: ").lower().strip()
     encontrado = False
-    for producto in lista_productos:
+    for producto in lista:
         if producto[0] == producto_buscado:
             print(f"Producto encontrado: {producto[0].capitalize()} - {producto[1].capitalize()} - ${producto[2]}")
             encontrado = True
@@ -40,6 +40,7 @@ def buscar_producto():
         if not encontrado:
             print(f"Producto '{producto_buscado}' no encontrado en la lista.")
 
+"""
 def eliminar_producto():
     for i in range(len(lista_productos)):
         print(f"{i + 1}. {lista_productos[i][0].capitalize()} - {lista_productos[i][1].capitalize()} - ${lista_productos[i][2]}")
