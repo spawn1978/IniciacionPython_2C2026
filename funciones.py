@@ -21,7 +21,7 @@ def agregar_productos():
                     
     print(f"Producto '{nombre}' agregado exitosamente.")
     print(lista_productos)  # Mostrar la lista de productos después de agregar uno nuevo
-                       
+"""                       
 def mostrar_productos():
     print("======================")    
     print("| Lista de productos |".upper())
@@ -120,3 +120,4 @@ case "1": # Agregar producto
             break
         case _: # Case default   
             print("Opción no válida. Por favor, seleccione una opción válida.")
+"""

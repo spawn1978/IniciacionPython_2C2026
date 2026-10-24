@@ -31,29 +31,9 @@ while True:
 
     match opcion:
         case "1": # Agregar producto
-            nombre = input("Ingrese el nombre del producto: ").lower().strip()
-            while nombre == "": 
-                print("El nombre del producto no puede estar vacío y debe contener solo letras.")
-                nombre = input("Ingrese el nombre del producto: ").lower().strip() 
-
-            categoria = input("Ingrese la categoría del producto: ").lower().strip()
-            while categoria == "": 
-                print("El nombre de la categoria no puede estar vacío y debe contener solo letras.")
-                categoria = input("Ingrese la categoria del producto: ").lower().strip() 
-
-            precio = (input("Ingrese el precio del producto: "))
-            while not precio.isdigit():
-                print("El valor del precio no puede estar vacío y debe ser solo numeros positivos.")
-                precio = input("Ingrese el precio del producto: ")
-
-            precio = int(precio)  # Convertir el precio a entero después de la validación
-
-            producto = [nombre, categoria, precio]  
-            lista_productos.append(producto)
-
-            print(f"Producto '{nombre}' agregado exitosamente.")
-            print(lista_productos)  # Mostrar la lista de productos después de agregar uno nuevo
-
+            agregar_producto(lista_productos)
+            print(lista_productos)  # Mostrar la lista actualizada después de agregar un producto
+            
         case "2":
             print("======================")    
             print("| Lista de productos |".upper())
