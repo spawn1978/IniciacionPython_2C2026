@@ -68,5 +68,10 @@ while True:
         case "5": 
             print("Saliendo del sistema...")
             break
-        case _: # Case default   
-            print("Opción no válida. Por favor, seleccione una opción válida.")
+        case _: # Case default
+                    try:
+                        int(opcion)
+                    except ValueError:
+                        print("Debe ingresar una opción numérica.")
+                    else:
+                        print("Opción no válida. Por favor, seleccione una opción del menú.")
