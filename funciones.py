@@ -5,22 +5,50 @@ def agregar_productos(lista):
     while nombre == "": 
         print("El nombre del producto no puede estar vacío y debe contener solo letras.")
         nombre = input("Ingrese el nombre del producto: ").lower().strip() 
-                    
+        
+    # Ingresar la descripción del producto con validación
+    descripcion = input("Ingrese la descripción del producto: ").lower().strip()
+    while descripcion == "": 
+        print("La descripción del producto no puede estar vacía y debe contener solo letras.")
+        descripcion = input("Ingrese la descripción del producto: ").lower().strip() 
+        
+                
     # Ingresar la categoría del producto con validación
     categoria = input("Ingrese la categoría del producto: ").lower().strip()
-    while categoria == "": 
-        print("El nombre de la categoria no puede estar vacío y debe contener solo letras.")
-        categoria = input("Ingrese la categoria del producto: ").lower().strip() 
+    while not categoria.isalpha():
+        print("La categoría no puede estar vacía y debe contener solo letras.")
+        categoria = input("Ingrese la categoría del producto: ").lower().strip()
     
+    # Ingresar cantidad de productos con validación
+    while True:
+        try:
+            cantidad = int(input("Ingrese la cantidad de productos: "))
+            
+            if cantidad <= 0:
+                print("La cantidad de productos debe ser un número positivo.")
+                continue  # Continuar solicitando la cantidad si es inválida
+            else:
+                break  # Salir del bucle si la cantidad es válida
+
+        except ValueError:
+            print("La cantidad de productos no puede estar vacía y debe ser solo numeros positivos.")
+        
     # Ingresar el precio del producto con validación                    
-    precio = (input("Ingrese el precio del producto: "))
-    while not precio.isdigit():
-        print("El valor del precio no puede estar vacío y debe ser solo numeros positivos.")
-        precio = input("Ingrese el precio del producto: ")
+    while True:
+        try:
+            precio = int(input("Ingrese el precio del producto: "))
+            if precio <= 0:
+                print("El precio debe ser un número positivo.")
+                continue
+            break  # Salir del bucle si la entrada es válido
+        except ValueError:
+            print("El valor del precio no puede estar vacío y debe ser solo numeros positivos.")    
+        
+   
                     
-    precio = int(precio)  # Convertir el precio a entero después de la validación
+    #precio = int(precio)  # Convertir el precio a entero después de la validación
                     
-    producto = [nombre, categoria, precio]  
+    producto = [nombre, descripcion, categoria, cantidad, precio]  
     lista.append(producto)
                     
     print(f"Producto '{nombre}' agregado exitosamente.")
@@ -31,7 +59,7 @@ def mostrar_productos(lista):
     print("| Lista de productos |".upper())
     print("======================")    
     for i in range(len(lista)):
-        print(f"{i + 1}. {lista[i][0].capitalize()} - {lista[i][1].capitalize()} - ${lista  [i][2]}")
+        print(f"{i + 1}. {lista[i][0].capitalize()} - {lista[i][1].capitalize()} - {lista[i][2].capitalize()} - {lista[i][3]} - ${lista[i][4]}")
 
 def buscar_producto():
     producto_buscado = input("Ingrese el nombre del producto que desea buscar: ").lower().strip()

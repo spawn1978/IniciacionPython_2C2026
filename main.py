@@ -12,9 +12,13 @@ Versión: 1.0.0
 from funciones import agregar_productos, mostrar_productos
 
 lista_productos = [
-    ["manazana", "fruta", 1000],
-    ["pera", "fruta", 2000],
-    ["banana", "fruta", 1500]
+    ["manazana", "fruta", "Fruta fresca", 3, 1000],
+    ["pera", "fruta", "fruta fresca", 2, 2000],
+    ["banana", "fruta", "fruta fresca", 5, 1500],
+    ["pan molde", "panaderia", "pan fresco", 10, 500],
+    ["leche", "lacteos", "leche fresca", 2, 3000],
+    ["manteca", "lacteos", "manteca fresca", 1, 4000],
+    ["queso", "lacteos", "queso fresco", 3, 6000]
 ]    
 
 while True:
@@ -43,7 +47,7 @@ while True:
             encontrado = False
             for producto in lista_productos:
                 if producto[0] == producto_buscado:
-                    print(f"Producto encontrado: {producto[0].capitalize()} - {producto[1].capitalize()} - ${producto[2]}")
+                    print(f"Producto encontrado: {producto[0].capitalize()} - {producto[1].capitalize()} - {producto[2].capitalize()} - {producto[3]} - ${producto[4]}")
                     encontrado = True
                     break
             if not encontrado:
@@ -51,8 +55,7 @@ while True:
 
         case "4":
             for i in range(len(lista_productos)):
-                print(f"{i + 1}. {lista_productos[i][0].capitalize()} - {lista_productos[i][1].capitalize()} - ${lista_productos[i][2]}")
-                ## Verificar, solo muestra el primer producto de la lista!!.
+                print(f"{i + 1}. {lista_productos[i][0].capitalize()} - {lista_productos[i][1].capitalize()} - {lista_productos[i][2].capitalize()} - {lista_productos[i][3]} - ${lista_productos[i][4]}")
             numero_producto = input("Ingrese el número del producto que desea eliminar: ")
 
             if numero_producto.isdigit():
