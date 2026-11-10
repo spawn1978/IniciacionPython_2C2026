@@ -16,7 +16,7 @@ def crear_tabla(conn):
             CREATE TABLE IF NOT EXISTS productos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nombre TEXT NOT NULL,
-                descripcion TEXT NOT NULL,
+                descripcion TEXT,
                 categoria TEXT NOT NULL,
                 cantidad INTEGER NOT NULL,
                 precio REAL NOT NULL
