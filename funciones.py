@@ -1,14 +1,18 @@
 def agregar_productos(lista):
+    
+    # Ingresar el nombre del producto con validación
     nombre = input("Ingrese el nombre del producto: ").lower().strip()
     while nombre == "": 
         print("El nombre del producto no puede estar vacío y debe contener solo letras.")
         nombre = input("Ingrese el nombre del producto: ").lower().strip() 
                     
+    # Ingresar la categoría del producto con validación
     categoria = input("Ingrese la categoría del producto: ").lower().strip()
     while categoria == "": 
         print("El nombre de la categoria no puede estar vacío y debe contener solo letras.")
         categoria = input("Ingrese la categoria del producto: ").lower().strip() 
-                    
+    
+    # Ingresar el precio del producto con validación                    
     precio = (input("Ingrese el precio del producto: "))
     while not precio.isdigit():
         print("El valor del precio no puede estar vacío y debe ser solo numeros positivos.")
