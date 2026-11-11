@@ -41,12 +41,10 @@ while True:
 
     match opcion:
         case "1": # Agregar producto
-            funciones.agregar_productos(lista_productos)
-            print(lista_productos)  # Mostrar la lista actualizada después de agregar un producto
+            funciones.agregar_productos()
             
         case "2":
             # Mostrar productos
-            #funciones.mostrar_productos(lista_productos)
             funciones_sql.listar_producto()
             
         case "3":

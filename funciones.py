@@ -1,6 +1,6 @@
 import funciones_sql
 
-def agregar_productos(lista):
+def agregar_productos():
     
     # Ingresar el nombre del producto con validación
     nombre = input("Ingrese el nombre del producto: ").lower().strip()
@@ -54,7 +54,7 @@ def agregar_productos(lista):
     #lista.append(producto)
     funciones_sql.registrar_producto(nombre, descripcion, categoria, cantidad, precio)               
     print(f"Producto '{nombre}' agregado exitosamente.")
-    print(lista)  # Mostrar la lista de productos después de agregar uno nuevo
+    #print(lista)  # Mostrar la lista de productos después de agregar uno nuevo
                      
 def mostrar_productos(lista):
     print("======================")    
