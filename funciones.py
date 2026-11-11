@@ -1,3 +1,5 @@
+import funciones_sql
+
 def agregar_productos(lista):
     
     # Ingresar el nombre del producto con validación
@@ -48,9 +50,9 @@ def agregar_productos(lista):
                     
     #precio = int(precio)  # Convertir el precio a entero después de la validación
                     
-    producto = [nombre, descripcion, categoria, cantidad, precio]  
-    lista.append(producto)
-                    
+    #producto = [nombre, descripcion, categoria, cantidad, precio]  
+    #lista.append(producto)
+    funciones_sql.registrar_producto(nombre, descripcion, categoria, cantidad, precio)               
     print(f"Producto '{nombre}' agregado exitosamente.")
     print(lista)  # Mostrar la lista de productos después de agregar uno nuevo
                      
@@ -58,9 +60,12 @@ def mostrar_productos(lista):
     print("======================")    
     print("| Lista de productos |".upper())
     print("======================")    
+    """
     for i in range(len(lista)):
         print(f"{i + 1}. {lista[i][0].capitalize()} - {lista[i][1].capitalize()} - {lista[i][2].capitalize()} - {lista[i][3]} - ${lista[i][4]}")
-
+"""
+    funciones_sql.listar_producto()
+    
 def buscar_producto():
     producto_buscado = input("Ingrese el nombre del producto que desea buscar: ").lower().strip()
     encontrado = False

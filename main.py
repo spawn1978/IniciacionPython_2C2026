@@ -9,7 +9,11 @@ Fecha de Creación: 2026-10-04
 Versión: 1.0.0
 """
 
-from funciones import agregar_productos, mostrar_productos
+#from funciones import agregar_productos, mostrar_productos
+import funciones, conexion
+
+conexion.crear_tabla()
+
 
 lista_productos = [
     ["manazana", "fruta", "Fruta fresca", 3, 1000],
@@ -20,6 +24,7 @@ lista_productos = [
     ["manteca", "lacteos", "manteca fresca", 1, 4000],
     ["queso", "lacteos", "queso fresco", 3, 6000]
 ]    
+
 
 while True:
     print("===================================")
@@ -35,39 +40,22 @@ while True:
 
     match opcion:
         case "1": # Agregar producto
-            agregar_productos(lista_productos)
+            funciones.agregar_productos(lista_productos)
             print(lista_productos)  # Mostrar la lista actualizada después de agregar un producto
             
         case "2":
             # Mostrar productos
-            mostrar_productos(lista_productos)
+            funciones.mostrar_productos(lista_productos)
             
         case "3":
-            producto_buscado = input("Ingrese el nombre del producto que desea buscar: ").lower().strip()
-            encontrado = False
-            for producto in lista_productos:
-                if producto[0] == producto_buscado:
-                    print(f"Producto encontrado: {producto[0].capitalize()} - {producto[1].capitalize()} - {producto[2].capitalize()} - {producto[3]} - ${producto[4]}")
-                    encontrado = True
-                    break
-            if not encontrado:
-                print(f"Producto '{producto_buscado}' no encontrado en la lista.")
-
+            # Busqueda de producto
+            producto_encontrados = funciones.buscar_productos(lista_productos)
+            funciones.mostrar_productos(producto_encontrados)
+            
         case "4":
-            for i in range(len(lista_productos)):
-                print(f"{i + 1}. {lista_productos[i][0].capitalize()} - {lista_productos[i][1].capitalize()} - {lista_productos[i][2].capitalize()} - {lista_productos[i][3]} - ${lista_productos[i][4]}")
-            numero_producto = input("Ingrese el número del producto que desea eliminar: ")
-
-            if numero_producto.isdigit():
-                numero_producto = int(numero_producto)
-                if numero_producto >= 1 and numero_producto <= len(lista_productos):
-                    producto_eliminado = lista_productos.pop(numero_producto - 1)
-                    print(f"Producto '{producto_eliminado[0].upper()}' eliminado exitosamente.")
-                else:
-                    print("Número de producto inválido.")
-            else:
-                print("Debe ingresar un número válido.")
-           
+            # Eliminar producto
+            funciones.eliminar_producto(lista_productos)
+            
         case "5": 
             print("Saliendo del sistema...")
             break

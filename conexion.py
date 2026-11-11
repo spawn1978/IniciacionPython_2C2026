@@ -2,16 +2,19 @@ import sqlite3
 
 def conectar():
     try:
-        conn = sqlite3.connect('inventario.db')
+        conexion = sqlite3.connect('inventario.db')
         print("Conexión exitosa a la base de datos.")
-        return conn
+        return conexion
     
     except sqlite3.Error as e:
         print(f"Error al conectar a la base de datos: {e}")
         return None
-def crear_tabla(conn):
+    
+def crear_tabla():
     try:
-        cursor = conn.cursor()
+        conexion = conectar()
+        cursor = conexion.cursor()
+        
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS productos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -19,11 +22,13 @@ def crear_tabla(conn):
                 descripcion TEXT,
                 categoria TEXT NOT NULL,
                 cantidad INTEGER NOT NULL,
-                precio REAL NOT NULL
+                precio INTEGER NOT NULL
             )
         ''')
-        conn.commit()
+        conexion.commit()
         print("Tabla 'productos' creada exitosamente.")
     
     except sqlite3.Error as e:
         print(f"Error al crear la tabla: {e}")
+    finally:
+        conexion.close()
