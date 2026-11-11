@@ -51,7 +51,8 @@ def agregar_productos():
                             
     #producto = [nombre, descripcion, categoria, cantidad, precio]  
     #lista.append(producto)
-    funciones_sql.registrar_producto(nombre, descripcion, categoria, cantidad, precio)               
+    funciones_sql.registrar_producto(nombre, descripcion, categoria, cantidad, precio)
+    nombre = nombre.upper()             
     print(Fore.GREEN + f"Producto '{nombre}' agregado exitosamente.")
     #print(lista)  # Mostrar la lista de productos después de agregar uno nuevo
                      
@@ -83,6 +84,8 @@ def buscar_producto():
 def eliminar_producto():
     producto_buscado = input(Fore.GREEN + "Ingrese el nombre del producto que desea eliminar: ").lower().strip()
     producto = funciones_sql.producto_eliminado(producto_buscado)
+    producto = producto.upper()
+    
     if producto is None:
         print(Fore.RED + f"No se encontraron productos con el nombre '{producto_buscado}'.")
         return
