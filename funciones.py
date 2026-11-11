@@ -6,28 +6,28 @@ init(autoreset=True)
 def agregar_productos():
     
     # Ingresar el nombre del producto con validación
-    nombre = input(Fore.GREEN + "Ingrese el nombre del producto: ").lower().strip()
+    nombre = input(Fore.WHITE + "Ingrese el nombre del producto: ").lower().strip()
     while nombre == "": 
         print(Fore.RED + "El nombre del producto no puede estar vacío y debe contener solo letras.")
-        nombre = input(Fore.GREEN + "Ingrese el nombre del producto: ").lower().strip() 
+        nombre = input(Fore.WHITE + "Ingrese el nombre del producto: ").lower().strip() 
         
     # Ingresar la descripción del producto con validación
-    descripcion = input("Ingrese la descripción del producto: ").lower().strip()
+    descripcion = input(Fore.WHITE + "Ingrese la descripción del producto: ").lower().strip()
     while descripcion == "": 
         print("La descripción del producto no puede estar vacía y debe contener solo letras.")
         descripcion = input("Ingrese la descripción del producto: ").lower().strip() 
         
                 
     # Ingresar la categoría del producto con validación
-    categoria = input(Fore.GREEN + "Ingrese la categoría del producto: ").lower().strip()
+    categoria = input(Fore.WHITE + "Ingrese la categoría del producto: ").lower().strip()
     while not categoria.isalpha():
         print(Fore.RED + "La categoría no puede estar vacía y debe contener solo letras.")
-        categoria = input(Fore.GREEN + "Ingrese la categoría del producto: ").lower().strip()
+        categoria = input(Fore.WHITE + "Ingrese la categoría del producto: ").lower().strip()
     
     # Ingresar cantidad de productos con validación
     while True:
         try:
-            cantidad = int(input(Fore.GREEN + "Ingrese la cantidad de productos: "))
+            cantidad = int(input(Fore.WHITE + "Ingrese la cantidad de productos: "))
             
             if cantidad <= 0:
                 print(Fore.RED + "La cantidad de productos debe ser un número positivo.")
@@ -41,7 +41,7 @@ def agregar_productos():
     # Ingresar el precio del producto con validación                    
     while True:
         try:
-            precio = int(input(Fore.GREEN + "Ingrese el precio del producto: "))
+            precio = int(input(Fore.WHITE + "Ingrese el precio del producto: "))
             if precio <= 0:
                 print(Fore.RED + "El precio debe ser un número positivo.")
                 continue
@@ -86,10 +86,9 @@ def buscar_producto():
 def eliminar_producto():
     producto_buscado = input(Fore.GREEN + "Ingrese el nombre del producto que desea eliminar: ").lower().strip()
     producto = funciones_sql.producto_eliminado(producto_buscado)
-    producto = producto.upper()
-    
     if producto is None:
         print(Fore.RED + f"No se encontraron productos con el nombre '{producto_buscado}'.")
         return
 
+    producto = producto.upper()
     print(Fore.GREEN + f"Producto '{producto}' eliminado exitosamente.")
