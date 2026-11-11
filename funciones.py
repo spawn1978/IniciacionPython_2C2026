@@ -6,10 +6,10 @@ init(autoreset=True)
 def agregar_productos():
     
     # Ingresar el nombre del producto con validación
-    nombre = input("Ingrese el nombre del producto: ").lower().strip()
+    nombre = input(Fore.GREEN + "Ingrese el nombre del producto: ").lower().strip()
     while nombre == "": 
-        print("El nombre del producto no puede estar vacío y debe contener solo letras.")
-        nombre = input("Ingrese el nombre del producto: ").lower().strip() 
+        print(Fore.RED + "El nombre del producto no puede estar vacío y debe contener solo letras.")
+        nombre = input(Fore.GREEN + "Ingrese el nombre del producto: ").lower().strip() 
         
     # Ingresar la descripción del producto con validación
     descripcion = input("Ingrese la descripción del producto: ").lower().strip()
@@ -19,35 +19,35 @@ def agregar_productos():
         
                 
     # Ingresar la categoría del producto con validación
-    categoria = input("Ingrese la categoría del producto: ").lower().strip()
+    categoria = input(Fore.GREEN + "Ingrese la categoría del producto: ").lower().strip()
     while not categoria.isalpha():
-        print("La categoría no puede estar vacía y debe contener solo letras.")
-        categoria = input("Ingrese la categoría del producto: ").lower().strip()
+        print(Fore.RED + "La categoría no puede estar vacía y debe contener solo letras.")
+        categoria = input(Fore.GREEN + "Ingrese la categoría del producto: ").lower().strip()
     
     # Ingresar cantidad de productos con validación
     while True:
         try:
-            cantidad = int(input("Ingrese la cantidad de productos: "))
+            cantidad = int(input(Fore.GREEN + "Ingrese la cantidad de productos: "))
             
             if cantidad <= 0:
-                print("La cantidad de productos debe ser un número positivo.")
+                print(Fore.RED + "La cantidad de productos debe ser un número positivo.")
                 continue  # Continuar solicitando la cantidad si es inválida
             else:
                 break  # Salir del bucle si la cantidad es válida
 
         except ValueError:
-            print("La cantidad de productos no puede estar vacía y debe ser solo numeros positivos.")
+            print(Fore.RED + "La cantidad de productos no puede estar vacía y debe ser solo numeros positivos.")
         
     # Ingresar el precio del producto con validación                    
     while True:
         try:
-            precio = int(input("Ingrese el precio del producto: "))
+            precio = int(input(Fore.GREEN + "Ingrese el precio del producto: "))
             if precio <= 0:
-                print("El precio debe ser un número positivo.")
+                print(Fore.RED + "El precio debe ser un número positivo.")
                 continue
             break  # Salir del bucle si la entrada es válido
         except ValueError:
-            print("El valor del precio no puede estar vacío y debe ser solo numeros positivos.")    
+            print(Fore.RED + "El valor del precio no puede estar vacío y debe ser solo numeros positivos.")    
                             
     #producto = [nombre, descripcion, categoria, cantidad, precio]  
     #lista.append(producto)
@@ -61,7 +61,7 @@ def mostrar_productos():
     if productos is None:
         return
     if not productos:
-        print("No hay productos registrados.")
+        print(Fore.RED + "No hay productos registrados.")
         return
 
     print(Fore.LIGHTBLUE_EX + "\nLISTA DE PRODUCTOS")
@@ -71,6 +71,8 @@ def mostrar_productos():
 def buscar_producto():
     producto_buscado = input(Fore.GREEN + "Ingrese el nombre del producto que desea buscar: ").lower().strip()
     productos = funciones_sql.producto_buscado(producto_buscado)
+    producto_buscado = producto_buscado.upper()
+    
     if productos is None:
         return
     if not productos:
