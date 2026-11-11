@@ -1,51 +1,26 @@
-# Pre-Entrega de Proyecto
+# Sistema de Gestión de Productos
 
-Vas a desarrollar un programa en Python que cumpla con las siguientes características.
-
-## Requerimientos
-
-### 1. Ingreso de datos de productos
-
-El sistema debe permitir ingresar datos básicos de los productos: **nombre**, **categoría** y **precio** (sin centavos).
-
-Estos datos deben almacenarse en una lista, donde cada producto sea representado como una sublista de tres elementos (`nombre`, `categoría` y `precio`).
-
-### 2. Visualización de productos registrados
-
-El programa debe incluir una funcionalidad para mostrar en pantalla todos los productos ingresados.
-
-La información debe presentarse de manera ordenada y legible, con cada producto numerado.
-
-### 3. Búsqueda de productos
-
-El sistema debe permitir buscar productos por su nombre.
-
-- Si encuentra coincidencias, debe mostrar la información completa de los productos que coincidan.
-- Si no hay coincidencias, debe informar que no se encontraron resultados.
-
-### 4. Eliminación de productos
-
-El sistema debe permitir eliminar un producto de la lista, identificándolo por su posición (número) en la lista.
+Aplicación de consola en Python para registrar y administrar productos usando SQLite. Los datos se guardan en el archivo `inventario.db`, por lo que permanecen disponibles al cerrar y volver a iniciar el programa.
 
 ## Requisitos
 
-- Usar **listas** para almacenar y gestionar los datos.
-- Incorporar bucles **`while`** y **`for`** según corresponda.
-- **Validar entradas** del usuario o usuaria, asegurándote de que no se ingresen datos vacíos o incorrectos.
-- Utilizar **condicionales** para gestionar las opciones del menú y las validaciones necesarias.
-- Presentar un **menú** que permita elegir entre las funcionalidades disponibles: agregar productos, visualizar productos, buscar productos y eliminar productos.
-- El programa debe continuar funcionando hasta que se elija una opción para **salir**.
+- Python 3.
+- SQLite, incluido en la biblioteca estándar de Python; no requiere instalar paquetes adicionales.
 
-## Consejos
+## Ejecutar
 
-> - Usá lo aprendido sobre listas y bucles para gestionar los datos y recorrerlos.
-> - Recordá validar las entradas utilizando condicionales.
-> - Utilizá las herramientas vistas para organizar y presentar la información de manera clara.
+Desde la carpeta del proyecto, ejecutá:
 
-## Ejemplo del menú de opciones
+```bash
+python3 main.py
+```
+
+Al iniciar, el programa crea la tabla `productos` si todavía no existe.
+
+## Menú
 
 ```text
-Sistema de Gestión Básica De Productos
+Sistema de Gestión de Productos
 
 1. Agregar producto
 2. Mostrar productos
@@ -53,3 +28,39 @@ Sistema de Gestión Básica De Productos
 4. Eliminar producto
 5. Salir
 ```
+
+### Agregar producto
+
+Solicita nombre, descripción, categoría, cantidad y precio. El nombre, la descripción y la categoría no pueden quedar vacíos. La categoría debe contener letras; cantidad y precio deben ser números enteros positivos. Los nombres, descripciones y categorías se guardan en minúsculas.
+
+### Mostrar productos
+
+Muestra los productos registrados con su identificador, nombre, descripción, categoría, cantidad y precio. Si no hay productos, informa que la base está vacía.
+
+### Buscar producto
+
+Busca por nombre usando coincidencias parciales. Por ejemplo, buscar `pep` puede mostrar el producto `pepino`. Si no hay coincidencias, informa que no se encontraron productos.
+
+### Eliminar producto
+
+Solicita el nombre exacto del producto y muestra el nombre eliminado. La eliminación usa el identificador de la fila encontrada; si el nombre no existe, informa que no se encontró. Si hay productos con el mismo nombre, elimina uno por vez.
+
+## Base de datos
+
+La tabla `productos` contiene estas columnas:
+
+| Columna | Tipo | Descripción |
+| --- | --- | --- |
+| `id` | Entero | Identificador único autoincremental |
+| `nombre` | Texto | Nombre del producto |
+| `descripcion` | Texto | Descripción del producto |
+| `categoria` | Texto | Categoría del producto |
+| `cantidad` | Entero | Unidades disponibles |
+| `precio` | Entero | Precio sin centavos |
+
+## Organización del código
+
+- `main.py`: muestra el menú y llama a la función correspondiente.
+- `funciones.py`: solicita datos, valida entradas y presenta los resultados.
+- `funciones_sql.py`: registra, lista, busca y elimina productos mediante consultas SQL.
+- `conexion.py`: se conecta a `inventario.db` y crea la tabla `productos`.
