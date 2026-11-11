@@ -10,10 +10,11 @@ Versión: 1.0.0
 """
 
 #from funciones import agregar_productos, mostrar_productos
-import funciones, conexion
+import funciones, funciones_sql, conexion
 
 conexion.crear_tabla()
 
+"""
 
 lista_productos = [
     ["manazana", "fruta", "Fruta fresca", 3, 1000],
@@ -24,7 +25,7 @@ lista_productos = [
     ["manteca", "lacteos", "manteca fresca", 1, 4000],
     ["queso", "lacteos", "queso fresco", 3, 6000]
 ]    
-
+"""
 
 while True:
     print("===================================")
@@ -45,7 +46,8 @@ while True:
             
         case "2":
             # Mostrar productos
-            funciones.mostrar_productos(lista_productos)
+            #funciones.mostrar_productos(lista_productos)
+            funciones_sql.listar_producto()
             
         case "3":
             # Busqueda de producto
