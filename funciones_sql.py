@@ -1,5 +1,6 @@
 from conexion import conectar
 
+
 def registrar_producto(nombre, descripcion, categoria, cantidad, precio):
     conn = conectar()
     if conn:
@@ -10,7 +11,6 @@ def registrar_producto(nombre, descripcion, categoria, cantidad, precio):
                 VALUES (?, ?, ?, ?, ?)
             ''', (nombre, descripcion, categoria, cantidad, precio))
             conn.commit()
-            print("Producto registrado exitosamente.")
         except Exception as e:
             print(f"Error al registrar el producto: {e}")
         finally:
@@ -48,7 +48,7 @@ def producto_buscado(producto_buscado):
             FROM productos WHERE nombre LIKE ? ''', (f"%{producto_buscado}%",))
         return cursor.fetchall()
     except Exception as e:
-        print(f"Error al listar los productos: {e}")
+        print(Fore.RED + f"Error al listar los productos: {e}")
         return None
     finally:
         conn.close()

@@ -1,4 +1,7 @@
 import funciones_sql
+from colorama import Fore, Back, Style, init
+
+init(autoreset=True)
 
 def agregar_productos():
     
@@ -45,15 +48,11 @@ def agregar_productos():
             break  # Salir del bucle si la entrada es válido
         except ValueError:
             print("El valor del precio no puede estar vacío y debe ser solo numeros positivos.")    
-        
-   
-                    
-    #precio = int(precio)  # Convertir el precio a entero después de la validación
-                    
+                            
     #producto = [nombre, descripcion, categoria, cantidad, precio]  
     #lista.append(producto)
     funciones_sql.registrar_producto(nombre, descripcion, categoria, cantidad, precio)               
-    print(f"Producto '{nombre}' agregado exitosamente.")
+    print(Fore.GREEN + f"Producto '{nombre}' agregado exitosamente.")
     #print(lista)  # Mostrar la lista de productos después de agregar uno nuevo
                      
 def mostrar_productos():
@@ -64,28 +63,28 @@ def mostrar_productos():
         print("No hay productos registrados.")
         return
 
-    print("\nLISTA DE PRODUCTOS")
+    print(Fore.LIGHTBLUE_EX + "\nLISTA DE PRODUCTOS")
     for id, nombre, descripcion, categoria, cantidad, precio in productos:
-        print(f"ID: {id} | Nombre: {nombre} | Descripcion: {descripcion} | Categoria: {categoria} | Cantidad: {cantidad} |  Precio: ${precio}")
+        print(Fore.LIGHTBLUE_EX + f"ID: {id} | Nombre: {nombre} | Descripcion: {descripcion} | Categoria: {categoria} | Cantidad: {cantidad} |  Precio: ${precio}")
             
 def buscar_producto():
-    producto_buscado = input("Ingrese el nombre del producto que desea buscar: ").lower().strip()
+    producto_buscado = input(Fore.GREEN + "Ingrese el nombre del producto que desea buscar: ").lower().strip()
     productos = funciones_sql.producto_buscado(producto_buscado)
     if productos is None:
         return
     if not productos:
-        print(f"No se encontraron productos con el nombre '{producto_buscado}'.")
+        print(Fore.RED + f"No se encontraron productos con el nombre '{producto_buscado}'.")
         return
 
-    print("\nRESULTADOS DE LA BÚSQUEDA")
+    print(Fore.GREEN + "\nRESULTADOS DE LA BÚSQUEDA")
     for id_producto, nombre, descripcion, categoria, cantidad, precio in productos:
-        print(f"ID: {id_producto} | Nombre: {nombre} | Descripcion: {descripcion} | Categoria: {categoria} | Cantidad: {cantidad} | Precio: ${precio}")
+        print(Fore.GREEN + f"ID: {id_producto} | Nombre: {nombre} | Descripcion: {descripcion} | Categoria: {categoria} | Cantidad: {cantidad} | Precio: ${precio}")
 
 def eliminar_producto():
-    producto_buscado = input("Ingrese el nombre del producto que desea eliminar: ").lower().strip()
+    producto_buscado = input(Fore.GREEN + "Ingrese el nombre del producto que desea eliminar: ").lower().strip()
     producto = funciones_sql.producto_eliminado(producto_buscado)
     if producto is None:
-        print(f"No se encontraron productos con el nombre '{producto_buscado}'.")
+        print(Fore.RED + f"No se encontraron productos con el nombre '{producto_buscado}'.")
         return
 
-    print(f"Producto '{producto}' eliminado exitosamente.")
+    print(Fore.GREEN + f"Producto '{producto}' eliminado exitosamente.")

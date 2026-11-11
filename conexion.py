@@ -1,13 +1,16 @@
+from colorama import Fore, Back, Style, init
 import sqlite3
+
+init(autoreset=True)
 
 def conectar():
     try:
         conexion = sqlite3.connect('inventario.db')
-        print("Conexión exitosa a la base de datos.")
+        print(Fore.GREEN + "Conexión exitosa a la base de datos.")
         return conexion
     
     except sqlite3.Error as e:
-        print(f"Error al conectar a la base de datos: {e}")
+        print(Fore.RED + f"Error al conectar a la base de datos: {e}")
         return None
     
 def crear_tabla():
@@ -26,9 +29,9 @@ def crear_tabla():
             )
         ''')
         conexion.commit()
-        print("Tabla 'productos' creada exitosamente.")
+        print(Fore.GREEN + "Tabla 'productos' creada exitosamente.")
     
     except sqlite3.Error as e:
-        print(f"Error al crear la tabla: {e}")
+        print(Fore.RED + f"Error al crear la tabla: {e}")
     finally:
         conexion.close()
