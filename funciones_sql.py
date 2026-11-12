@@ -35,7 +35,7 @@ def listar_producto():
     finally:
         conn.close()
         
-def producto_buscado(producto_buscado):
+def producto_buscado(id):
     conn = conectar()
     if conn is None:
         return None
@@ -44,7 +44,8 @@ def producto_buscado(producto_buscado):
         cursor = conn.cursor()
         cursor.execute('''
             SELECT id, nombre, descripcion, categoria, cantidad, precio
-            FROM productos WHERE nombre LIKE ? ''', (f"%{producto_buscado}%",))
+            FROM productos WHERE id = ?
+        ''', (id,))
         return cursor.fetchall()
     except Exception as e:
         print(Fore.RED + f"Error al listar los productos: {e}")

@@ -71,27 +71,29 @@ def mostrar_productos():
 
 # Funcion buscar_producto            
 def buscar_producto():
-    producto_buscado = input(Fore.GREEN + "Ingrese el nombre del producto que desea buscar: ").lower().strip()
-    productos = funciones_sql.producto_buscado(producto_buscado)
-    producto_buscado = producto_buscado.upper()
+    while True:
+        try:
+            id = int(input(Fore.GREEN + "Ingrese el ID del producto que desea buscar: "))
+            if id <= 0:
+                print(Fore.RED + "El valor del ID debe ser un número positivo.")
+                continue
+            break
+        
+        except ValueError:
+            print(Fore.RED + "El valor del ID no puede estar vacio y debe ser solo numeros positivos.")
+            continue
     
+    productos = funciones_sql.producto_buscado(id)
     if productos is None:
         return
     if not productos:
-        print(Fore.RED + f"No se encontraron productos con el nombre '{producto_buscado}'.")
+        print(Fore.RED + f"No se encontraron productos con ese ID '{id}'.")
         return
-
+    
     print(Fore.GREEN + "\nRESULTADOS DE LA BÚSQUEDA")
-    for id_producto, nombre, descripcion, categoria, cantidad, precio in productos:
-        print(Fore.GREEN + f"ID: {id_producto} | Nombre: {nombre} | Descripcion: {descripcion} | Categoria: {categoria} | Cantidad: {cantidad} | Precio: ${precio}")
+    for id_encontrado, nombre, descripcion, categoria, cantidad, precio in productos:
+        print(Fore.GREEN + f"ID: {id_encontrado} | Nombre: {nombre} | Descripcion: {descripcion} | Categoria: {categoria} | Cantidad: {cantidad} | Precio: ${precio}")
 
-
-
-
-
-###########################################
-# Funcion actualizar_producto
-# DESARROLLAR LA FUNCION!!!!!!!!!!!!!!!!!!
 def actualizar_producto():
     producto_buscado = input(Fore.GREEN + "Ingrese el dato del producto(ID) que desea actualizar: ")
     
@@ -113,7 +115,7 @@ def actualizar_producto():
 def eliminar_producto():    
     while True:
         try:
-            id = int(input(Fore.WHITE + "Ingrese el ID del producto que desea eliminar: "))
+            id = int(input(Fore.GREEN + "Ingrese el ID del producto que desea eliminar: "))
                 
             if id <= 0:
                 print(Fore.RED + "El valor del ID debe ser un número positivo.")
