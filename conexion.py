@@ -1,8 +1,10 @@
-from colorama import Fore, Back, Style, init
+#from colorama import Fore, Back, Style, init
+from colorama import Fore, init, Back, Style
 import sqlite3
 
 init(autoreset=True)
 
+# Funcion conectar. Realiza la conexion a la base de datos
 def conectar():
     try:
         conexion = sqlite3.connect('inventario.db')
@@ -12,7 +14,8 @@ def conectar():
     except sqlite3.Error as e:
         print(Fore.RED + f"Error al conectar a la base de datos: {e}")
         return None
-    
+
+# Funcion crear_tabla. Crea tabla iniciarl    
 def crear_tabla():
     try:
         conexion = conectar()

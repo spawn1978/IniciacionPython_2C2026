@@ -151,7 +151,7 @@ def producto_eliminado(producto_buscado):
 
     try:
         cursor = conn.cursor()
-        cursor.execute("SELECT id, nombre FROM productos WHERE nombre = ?", (producto_buscado,))
+        cursor.execute("SELECT id, nombre FROM productos WHERE id = ?", (producto_buscado,))
         producto = cursor.fetchone()
         if producto is None:
             return None

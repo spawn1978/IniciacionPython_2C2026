@@ -8,7 +8,8 @@ Fecha de Creación: 2026-10-04
 Versión: 1.0.0
 """
 import funciones, funciones_sql, conexion
-from colorama import Fore, Back, Style, init
+#from colorama import Fore, Back, Style, init
+from colorama import Fore, init, Back, Style
 
 init(autoreset=True)
 

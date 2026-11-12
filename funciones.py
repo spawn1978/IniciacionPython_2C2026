@@ -1,5 +1,6 @@
 import funciones_sql
-from colorama import Fore, Back, Style, init
+#from colorama import Fore, Back, Style, init
+from colorama import Fore, init, Back, Style
 
 init(autoreset=True)
 
@@ -94,7 +95,6 @@ def buscar_producto():
 def actualizar_producto():
     producto_buscado = input(Fore.GREEN + "Ingrese el dato del producto(ID) que desea actualizar: ")
     
-    
     productos = funciones_sql.producto_actualizado(producto_buscado)
     producto_buscado = producto_buscado.upper()
 
@@ -110,12 +110,24 @@ def actualizar_producto():
 ###########################################
 
 # Funcion eliminar_producto
-def eliminar_producto():
-    producto_buscado = input(Fore.GREEN + "Ingrese el nombre del producto que desea eliminar: ").lower().strip()
-    producto = funciones_sql.producto_eliminado(producto_buscado)
+def eliminar_producto():    
+    while True:
+        try:
+            id = int(input(Fore.WHITE + "Ingrese el ID del producto que desea eliminar: "))
+                
+            if id <= 0:
+                print(Fore.RED + "El valor del ID debe ser un número positivo.")
+                continue  # Continuar solicitando la cantidad si es inválida
+            else:
+                break  # Salir del bucle si la cantidad es válida
+    
+        except ValueError:
+            print(Fore.RED + "El valor del ID no puede estar vacio y debe ser solo numeros positivos.")
+        return
+                
+    producto = funciones_sql.producto_eliminado(id)
     if producto is None:
-        print(Fore.RED + f"No se encontraron productos con el nombre '{producto_buscado}'.")
+        print(Fore.RED + f"No se encontraron productos con ese ID '{id}'.")
         return
 
-    producto = producto.upper()
-    print(Fore.GREEN + f"Producto '{producto}' eliminado exitosamente.")
+    print(Fore.GREEN + f"Producto '{producto}' con ID '{id}' eliminado exitosamente.")
