@@ -1,6 +1,5 @@
 from conexion import conectar
 
-
 def registrar_producto(nombre, descripcion, categoria, cantidad, precio):
     conn = conectar()
     if conn:
@@ -52,6 +51,89 @@ def producto_buscado(producto_buscado):
         return None
     finally:
         conn.close()
+        
+        
+def nombre_actualizado(producto_buscado):
+    conn = conectar()
+    if conn is None:
+        return None
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute('''
+            UPDATE productos WHERE nombre LIKE ? ''', (f"%{producto_buscado}%",))
+        return cursor.fetchall()
+    except Exception as e:
+        print(Fore.RED + f"Error al listar los productos: {e}")
+        return None
+    finally:
+        conn.close()
+        
+def descripcion_actualizado(producto_buscado):
+    conn = conectar()
+    if conn is None:
+        return None
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute('''
+            UPDATE productos WHERE nombre LIKE ? ''', (f"%{producto_buscado}%",))
+        return cursor.fetchall()
+    except Exception as e:
+        print(Fore.RED + f"Error al listar los productos: {e}")
+        return None
+    finally:
+        conn.close()
+
+def categoria_actualizado(producto_buscado):
+    conn = conectar()
+    if conn is None:
+        return None
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute('''
+            UPDATE productos WHERE nombre LIKE ? ''', (f"%{producto_buscado}%",))
+        return cursor.fetchall()
+    except Exception as e:
+        print(Fore.RED + f"Error al listar los productos: {e}")
+        return None
+    finally:
+        conn.close()
+
+def cantidad_actualizado(producto_buscado):
+    conn = conectar()
+    if conn is None:
+        return None
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute('''
+            UPDATE productos WHERE nombre LIKE ? ''', (f"%{producto_buscado}%",))
+        return cursor.fetchall()
+    except Exception as e:
+        print(Fore.RED + f"Error al listar los productos: {e}")
+        return None
+    finally:
+        conn.close()
+        
+def precio_actualizado(producto_buscado):
+    conn = conectar()
+    if conn is None:
+        return None
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute('''
+            UPDATE productos WHERE nombre LIKE ? ''', (f"%{producto_buscado}%",))
+        return cursor.fetchall()
+    except Exception as e:
+        print(Fore.RED + f"Error al listar los productos: {e}")
+        return None
+    finally:
+        conn.close()
+        
+        
 def producto_eliminado(producto_buscado):
     conn = conectar()
     if conn is None:

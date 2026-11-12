@@ -3,6 +3,7 @@ from colorama import Fore, Back, Style, init
 
 init(autoreset=True)
 
+# Funcion agregar_productos
 def agregar_productos():
     
     # Ingresar el nombre del producto con validación
@@ -49,13 +50,12 @@ def agregar_productos():
         except ValueError:
             print(Fore.RED + "El valor del precio no puede estar vacío y debe ser solo numeros positivos.")    
                             
-    #producto = [nombre, descripcion, categoria, cantidad, precio]  
-    #lista.append(producto)
     funciones_sql.registrar_producto(nombre, descripcion, categoria, cantidad, precio)
     nombre = nombre.upper()             
     print(Fore.GREEN + f"Producto '{nombre}' agregado exitosamente.")
     #print(lista)  # Mostrar la lista de productos después de agregar uno nuevo
-                     
+
+# Funcion mostrar_producto                    
 def mostrar_productos():
     productos = funciones_sql.listar_producto()
     if productos is None:
@@ -67,7 +67,8 @@ def mostrar_productos():
     print(Fore.LIGHTBLUE_EX + "\nLISTA DE PRODUCTOS")
     for id, nombre, descripcion, categoria, cantidad, precio in productos:
         print(Fore.LIGHTBLUE_EX + f"ID: {id} | Nombre: {nombre} | Descripcion: {descripcion} | Categoria: {categoria} | Cantidad: {cantidad} |  Precio: ${precio}")
-            
+
+# Funcion buscar_producto            
 def buscar_producto():
     producto_buscado = input(Fore.GREEN + "Ingrese el nombre del producto que desea buscar: ").lower().strip()
     productos = funciones_sql.producto_buscado(producto_buscado)
@@ -83,6 +84,32 @@ def buscar_producto():
     for id_producto, nombre, descripcion, categoria, cantidad, precio in productos:
         print(Fore.GREEN + f"ID: {id_producto} | Nombre: {nombre} | Descripcion: {descripcion} | Categoria: {categoria} | Cantidad: {cantidad} | Precio: ${precio}")
 
+
+
+
+
+###########################################
+# Funcion actualizar_producto
+# DESARROLLAR LA FUNCION!!!!!!!!!!!!!!!!!!
+def actualizar_producto():
+    producto_buscado = input(Fore.GREEN + "Ingrese el dato del producto(ID) que desea actualizar: ")
+    
+    
+    productos = funciones_sql.producto_actualizado(producto_buscado)
+    producto_buscado = producto_buscado.upper()
+
+    if productos is None:
+        return
+    if not productos:
+        print(Fore.RED + f"No se encontraron productos con el nombre '{producto_buscado}'.")
+        return
+    
+    print(Fore.GREEN + "\nRESULTADOS DE LA BÚSQUEDA")
+    for id_producto, nombre, descripcion, categoria, cantidad, precio in productos:
+        print(Fore.GREEN + f"ID: {id_producto} | Nombre: {nombre} | Descripcion: {descripcion} | Categoria: {categoria} | Cantidad: {cantidad} | Precio: ${precio}")
+###########################################
+
+# Funcion eliminar_producto
 def eliminar_producto():
     producto_buscado = input(Fore.GREEN + "Ingrese el nombre del producto que desea eliminar: ").lower().strip()
     producto = funciones_sql.producto_eliminado(producto_buscado)
