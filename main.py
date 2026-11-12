@@ -61,23 +61,34 @@ while True:
             
                 match opcion:
                     case "1": # Agregar producto
-                            print("Actualizar Nombre")
-                            #funciones.agregar_productos()
-                                    
+                        print("Actualizar Nombre")
+                        id = int(input(Fore.GREEN + "Ingrese el ID: "))
+                        nuevo_nombre = str(input(Fore.GREEN + "Ingrese el nuevo nombre: "))
+                        funciones_sql.nombre_actualizado(nuevo_nombre,id)
+ 
                     case "2":
                             print("Actualizar Descripcion")
-                            #funciones.mostrar_productos()
-                                    
+                            id = int(input(Fore.GREEN + "Ingrese el ID: "))
+                            nueva_descripcion = str(input(Fore.GREEN + "Ingrese la nueva descripcion: "))
+                            funciones_sql.descripcion_actualizado(nueva_descripcion,id)                                   
+                            
                     case "3":
                             print("Actualizar Categoria")
-                            #funciones.buscar_producto()
+                            id = int(input(Fore.GREEN + "Ingrese el ID: "))
+                            nueva_categoria = str(input(Fore.GREEN + "Ingrese la nueva categoria: "))
+                            funciones_sql.categoria_actualizado(nueva_categoria,id)
                                     
                     case "4":
                             print("Actualizar Cantidad")
-                            #funciones.eliminar_producto()
+                            id = int(input(Fore.GREEN + "Ingrese el ID: "))
+                            nueva_cantidad = int(input(Fore.GREEN + "Ingrese la nueva cantidad: "))
+                            funciones_sql.cantidad_actualizado(nueva_cantidad,id)
+                            
                     case "5":
                             print("Actualizar Precio")
-                            #funciones.eliminar_producto()
+                            id = int(input(Fore.GREEN + "Ingrese el ID: "))
+                            nuevo_precio = int(input(Fore.GREEN + "Ingrese el nuevo precio: "))
+                            funciones_sql.precio_actualizado(nuevo_precio,id)
                                     
                     case "6":
                             print(Fore.GREEN + "Saliendo del submenu de actualizacion...")
@@ -91,7 +102,7 @@ while True:
                                     print(Fore.RED + "Opción no válida. Por favor, seleccione una opción del menú.")
                         
         case "6": 
-            print("Saliendo del sistema...")
+            print(Fore.RED + "Saliendo del sistema...")
             break
         case _: # Case default
                     try:

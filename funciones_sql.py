@@ -53,23 +53,25 @@ def producto_buscado(producto_buscado):
         conn.close()
         
         
-def nombre_actualizado(producto_buscado):
+def nombre_actualizado(nuevo_nombre, id):
     conn = conectar()
     if conn is None:
         return None
 
     try:
         cursor = conn.cursor()
-        cursor.execute('''
-            UPDATE productos WHERE nombre LIKE ? ''', (f"%{producto_buscado}%",))
-        return cursor.fetchall()
+        cursor.execute("""
+            UPDATE productos 
+            SET nombre = ? 
+            WHERE id = ? """,(nuevo_nombre,id))
+        conn.commit()
     except Exception as e:
-        print(Fore.RED + f"Error al listar los productos: {e}")
+        print(Fore.RED + f"Error al actualizar los productos: {e}")
         return None
     finally:
         conn.close()
         
-def descripcion_actualizado(producto_buscado):
+def descripcion_actualizado(nueva_descripcion,id):
     conn = conectar()
     if conn is None:
         return None
@@ -77,15 +79,17 @@ def descripcion_actualizado(producto_buscado):
     try:
         cursor = conn.cursor()
         cursor.execute('''
-            UPDATE productos WHERE nombre LIKE ? ''', (f"%{producto_buscado}%",))
-        return cursor.fetchall()
+            UPDATE productos 
+            SET descripcion = ? 
+            WHERE id = ? ''',(nueva_descripcion,id))
+        conn.commit()
     except Exception as e:
-        print(Fore.RED + f"Error al listar los productos: {e}")
+        print(Fore.RED + f"Error al actualizar los productos: {e}")
         return None
     finally:
         conn.close()
 
-def categoria_actualizado(producto_buscado):
+def categoria_actualizado(nueva_categoria, id):
     conn = conectar()
     if conn is None:
         return None
@@ -93,15 +97,17 @@ def categoria_actualizado(producto_buscado):
     try:
         cursor = conn.cursor()
         cursor.execute('''
-            UPDATE productos WHERE nombre LIKE ? ''', (f"%{producto_buscado}%",))
-        return cursor.fetchall()
+            UPDATE productos 
+            SET categoria = ? 
+            WHERE id = ? ''', (nueva_categoria, id))
+        conn.commit()
     except Exception as e:
-        print(Fore.RED + f"Error al listar los productos: {e}")
+        print(Fore.RED + f"Error al actualizar los productos: {e}")
         return None
     finally:
         conn.close()
 
-def cantidad_actualizado(producto_buscado):
+def cantidad_actualizado(nueva_cantidad, id):
     conn = conectar()
     if conn is None:
         return None
@@ -109,15 +115,17 @@ def cantidad_actualizado(producto_buscado):
     try:
         cursor = conn.cursor()
         cursor.execute('''
-            UPDATE productos WHERE nombre LIKE ? ''', (f"%{producto_buscado}%",))
-        return cursor.fetchall()
+            UPDATE productos 
+            SET cantidad = ? 
+            WHERE id = ? ''',(nueva_cantidad, id))
+        conn.commit()
     except Exception as e:
-        print(Fore.RED + f"Error al listar los productos: {e}")
+        print(Fore.RED + f"Error al actualizar los productos: {e}")
         return None
     finally:
         conn.close()
         
-def precio_actualizado(producto_buscado):
+def precio_actualizado(nuevo_precio, id):
     conn = conectar()
     if conn is None:
         return None
@@ -125,10 +133,12 @@ def precio_actualizado(producto_buscado):
     try:
         cursor = conn.cursor()
         cursor.execute('''
-            UPDATE productos WHERE nombre LIKE ? ''', (f"%{producto_buscado}%",))
-        return cursor.fetchall()
+            UPDATE productos 
+            SET precio = ? 
+           WHERE id = ? ''', (nuevo_precio, id))
+        conn.commit()
     except Exception as e:
-        print(Fore.RED + f"Error al listar los productos: {e}")
+        print(Fore.RED + f"Error al actualizar los productos: {e}")
         return None
     finally:
         conn.close()
