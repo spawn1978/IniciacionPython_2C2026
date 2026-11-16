@@ -1,11 +1,18 @@
 # Sistema de Gestión de Productos
 
-Aplicación de consola en Python para registrar y administrar productos usando SQLite. Los datos se guardan en el archivo `inventario.db`, por lo que permanecen disponibles al cerrar y volver a iniciar el programa.
+Aplicación de consola escrita en Python para registrar, consultar, actualizar y eliminar productos. Utiliza SQLite para guardar la información en el archivo `inventario.db`, ubicado en el directorio desde donde se ejecuta el programa.
 
 ## Requisitos
 
-- Python 3.
-- SQLite, incluido en la biblioteca estándar de Python; no requiere instalar paquetes adicionales.
+- Python 3.10 o posterior.
+- `colorama` para mostrar mensajes con colores.
+- SQLite, incluido en la biblioteca estándar de Python.
+
+Instalá `colorama` si todavía no está disponible en el entorno:
+
+```bash
+python3 -m pip install colorama
+```
 
 ## Ejecutar
 
@@ -15,72 +22,102 @@ Desde la carpeta del proyecto, ejecutá:
 python3 main.py
 ```
 
-Al iniciar, el programa crea la tabla `productos` si todavía no existe.
+Al iniciar, la aplicación crea las tablas `productos` y `ventas` si todavía no existen.
 
-## Menú
-
-```text
-Sistema de Gestión de Productos
+## Menú principal
 
 1. Agregar producto
 2. Mostrar productos
-3. Buscar producto
-4. Eliminar producto
-5. Salir
-```
+3. Buscar producto por ID
+4. Eliminar producto por ID
+5. Actualizar producto
+6. Generar reporte de stock
+7. Salir
+
+La opción 5 abre un submenú para actualizar el nombre, la descripción, la categoría, la cantidad o el precio. La opción 6 solicita una cantidad mínima y muestra los productos cuya cantidad disponible es igual o inferior a ese valor.
+
+## Operaciones
 
 ### Agregar producto
 
-Solicita nombre, descripción, categoría, cantidad y precio. El nombre, la descripción y la categoría no pueden quedar vacíos. La categoría debe contener letras; cantidad y precio deben ser números enteros positivos. Los nombres, descripciones y categorías se guardan en minúsculas.
+Solicita nombre, descripción, categoría, cantidad y precio. El nombre y la descripción no pueden quedar vacíos; la categoría debe contener solamente letras. La cantidad y el precio deben ser números enteros positivos. Los campos de texto se guardan en minúsculas.
 
 ### Mostrar productos
 
-Muestra los productos registrados con su identificador, nombre, descripción, categoría, cantidad y precio. Si no hay productos, informa que la base está vacía.
+Muestra todos los productos ordenados por ID, con nombre, descripción, categoría, cantidad y precio. Informa cuando no hay productos registrados.
 
 ### Buscar producto
 
-Busca por nombre usando coincidencias parciales. Por ejemplo, buscar `pep` puede mostrar el producto `pepino`. Si no hay coincidencias, informa que no se encontraron productos.
+Solicita un ID y muestra el producto correspondiente. Si el ID no existe, informa que no se encontraron resultados.
 
 ### Eliminar producto
 
-Solicita el nombre exacto del producto y muestra el nombre eliminado. La eliminación usa el identificador de la fila encontrada; si el nombre no existe, informa que no se encontró. Si hay productos con el mismo nombre, elimina uno por vez.
+Solicita el ID del producto. Si existe, elimina el registro y confirma la operación; si no existe, informa que no se encontró.
+
+### Actualizar producto
+
+Permite modificar un campo del producto seleccionado por ID. Antes de actualizar, las funciones SQL verifican que el producto exista. Si no existe, informan que el ID del producto no existe.
+
+### Generar reporte
+
+Solicita un número entero y lista los productos con una cantidad disponible menor o igual a ese número. Si no hay productos que cumplan la condición, muestra un mensaje indicando que el reporte no tiene resultados.
 
 ## Base de datos
 
-La tabla `productos` contiene estas columnas:
+La tabla `productos` almacena los datos de cada producto:
 
-| Columna | Tipo | Descripción |
+| Columna | Tipo SQLite | Descripción |
 | --- | --- | --- |
-| `id` | Entero | Identificador único autoincremental |
-| `nombre` | Texto | Nombre del producto |
-| `descripcion` | Texto | Descripción del producto |
-| `categoria` | Texto | Categoría del producto |
-| `cantidad` | Entero | Unidades disponibles |
-| `precio` | Entero | Precio sin centavos |
+| `id` | `INTEGER` | Identificador único autoincremental |
+| `nombre` | `TEXT` | Nombre del producto; no puede ser nulo |
+| `descripcion` | `TEXT` | Descripción del producto |
+| `categoria` | `TEXT` | Categoría; no puede ser nula |
+| `cantidad` | `INTEGER` | Unidades disponibles; no puede ser nula |
+| `precio` | `INTEGER` | Precio; no puede ser nulo |
 
-## Funcionamiento de las funciones
+La tabla `ventas` también se crea al iniciar:
+
+| Columna | Tipo SQLite | Descripción |
+| --- | --- | --- |
+| `id` | `INTEGER` | Identificador único autoincremental |
+| `producto_id` | `INTEGER` | ID del producto relacionado |
+| `cantidad` | `INTEGER` | Unidades vendidas; debe ser mayor que cero |
+| `precio` | `INTEGER` | Precio registrado para la venta |
+| `fecha` | `TIMESTAMP` | Fecha y hora de creación; por defecto, la fecha actual |
+
+`ventas.producto_id` referencia `productos.id`. La aplicación todavía no incluye opciones en el menú para registrar o consultar ventas.
+
+## Archivos y funciones
 
 ### `main.py`
 
-El archivo no define funciones. Al ejecutarse, llama a `crear_tabla()` para asegurar que la tabla exista y luego mantiene el menú dentro de un ciclo `while`. Según la opción elegida, llama a la función correspondiente de `funciones.py`; la opción 5 termina el ciclo.
+Crea las tablas al iniciar y muestra el menú principal. Gestiona las opciones, el submenú de actualización y la impresión de los resultados del reporte.
 
 ### `funciones.py`
 
-- `agregar_productos()`: pide nombre, descripción, categoría, cantidad y precio. Repite la solicitud si faltan nombre o descripción, si la categoría no contiene solo letras, o si cantidad/precio no son enteros positivos. Convierte a minúsculas los campos de texto y envía los datos a `funciones_sql.registrar_producto()`. No devuelve un valor.
-- `mostrar_productos()`: solicita todas las filas a `funciones_sql.listar_producto()`. Informa si no hay productos; de lo contrario, imprime cada fila con sus seis campos. No devuelve un valor.
-- `buscar_producto()`: pide un texto de búsqueda, lo limpia y convierte a minúsculas, y lo envía a `funciones_sql.producto_buscado()`. Imprime las coincidencias o un aviso si no hay resultados. No devuelve un valor.
-- `eliminar_producto()`: pide el nombre del producto, lo limpia y convierte a minúsculas, y lo envía a `funciones_sql.producto_eliminado()`. Muestra el nombre eliminado o informa que no se encontró. No devuelve un valor.
+- `agregar_productos()`: solicita y valida los datos de un producto y los envía para guardarlos.
+- `mostrar_productos()`: obtiene y muestra la lista de productos.
+- `buscar_producto()`: solicita un ID y muestra el producto encontrado.
+- `eliminar_producto()`: solicita un ID y elimina el producto correspondiente.
 
 ### `funciones_sql.py`
 
-Estas funciones realizan las consultas y cierran la conexión al terminar. Las consultas usan parámetros (`?`) para pasar los valores a SQLite.
+Estas funciones realizan consultas parametrizadas a SQLite y cierran la conexión al terminar:
 
-- `registrar_producto(nombre, descripcion, categoria, cantidad, precio)`: inserta un registro en `productos` y confirma el cambio con `commit()`. Informa si se registró o si ocurrió un error. No devuelve un valor.
-- `listar_producto()`: obtiene todos los productos ordenados por `id`. Devuelve una lista de tuplas, una por fila, con los campos `id`, `nombre`, `descripcion`, `categoria`, `cantidad` y `precio`. Devuelve `None` si no puede conectarse o si ocurre un error.
-- `producto_buscado(producto_buscado)`: busca nombres que contengan el texto recibido (`LIKE`). Devuelve una lista de tuplas con los seis campos del producto, o una lista vacía si no hay coincidencias. Devuelve `None` ante un error de conexión o consulta.
-- `producto_eliminado(producto_buscado)`: busca una fila cuyo nombre coincida exactamente con el texto recibido. `fetchone()` obtiene esa fila; si existe, elimina el producto usando su `id`, confirma el cambio y devuelve el nombre eliminado. Si no encuentra una fila o ocurre un error, devuelve `None`. Si hay nombres repetidos, elimina una sola fila.
+- `registrar_producto(nombre, descripcion, categoria, cantidad, precio)`: inserta un producto y confirma el cambio.
+- `listar_producto()`: devuelve todos los productos ordenados por ID.
+- `producto_buscado(id)`: devuelve el producto que coincide con el ID.
+- `nombre_actualizado(nuevo_nombre, id)`: actualiza el nombre si el ID existe.
+- `descripcion_actualizado(nueva_descripcion, id)`: actualiza la descripción si el ID existe.
+- `categoria_actualizado(nueva_categoria, id)`: actualiza la categoría si el ID existe.
+- `cantidad_actualizado(nueva_cantidad, id)`: actualiza la cantidad si el ID existe.
+- `precio_actualizado(nuevo_precio, id)`: actualiza el precio si el ID existe.
+- `producto_eliminado(producto_buscado)`: elimina el producto indicado por ID y devuelve su nombre.
+- `generar_reporte(cantidad_minima)`: devuelve los productos cuya cantidad es menor o igual al valor indicado.
+
+Las funciones de consulta devuelven `None` si no pueden conectarse o si ocurre un error. El reporte devuelve una lista vacía cuando la consulta se ejecuta correctamente pero no encuentra productos.
 
 ### `conexion.py`
 
-- `conectar()`: abre una conexión al archivo `inventario.db`. Devuelve el objeto de conexión si tiene éxito; en caso de error, muestra el mensaje y devuelve `None`.
-- `crear_tabla()`: se conecta a la base y crea la tabla `productos` si todavía no existe, con las columnas detalladas arriba. Confirma la operación y muestra un mensaje. Se ejecuta al iniciar `main.py`.
+- `conectar()`: abre y devuelve una conexión con `inventario.db`.
+- `crear_tabla()`: crea las tablas `productos` y `ventas` si no existen y activa las claves foráneas en la conexión usada para crearlas.
