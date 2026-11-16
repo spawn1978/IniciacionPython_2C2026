@@ -25,7 +25,9 @@ while True:
     print("3. Buscar producto")
     print("4. Eliminar producto")
     print("5. Actualizar producto")
-    print("6. Salir")
+    print("6. Generar Reporte")
+    print("7. Salir")
+    
 
     opcion = input("Seleccione una opción: ".strip())  
 
@@ -101,8 +103,12 @@ while True:
                                     print(Fore.RED + "Debe ingresar una opción numérica.")
                                 else:
                                     print(Fore.RED + "Opción no válida. Por favor, seleccione una opción del menú.")
+                                    
+        case "6":
+            # Generar reporte
+            funciones.generar_reporte()
                         
-        case "6": 
+        case "7": 
             print(Fore.RED + "Saliendo del sistema...")
             break
         case _: # Case default

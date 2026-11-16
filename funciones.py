@@ -94,6 +94,7 @@ def buscar_producto():
     for id_encontrado, nombre, descripcion, categoria, cantidad, precio in productos:
         print(Fore.GREEN + f"ID: {id_encontrado} | Nombre: {nombre} | Descripcion: {descripcion} | Categoria: {categoria} | Cantidad: {cantidad} | Precio: ${precio}")
 
+"""
 def actualizar_producto():
     producto_buscado = input(Fore.GREEN + "Ingrese el dato del producto(ID) que desea actualizar: ")
     
@@ -109,6 +110,7 @@ def actualizar_producto():
     print(Fore.GREEN + "\nRESULTADOS DE LA BÚSQUEDA")
     for id_producto, nombre, descripcion, categoria, cantidad, precio in productos:
         print(Fore.GREEN + f"ID: {id_producto} | Nombre: {nombre} | Descripcion: {descripcion} | Categoria: {categoria} | Cantidad: {cantidad} | Precio: ${precio}")
+"""
 ###########################################
 
 # Funcion eliminar_producto
@@ -133,3 +135,7 @@ def eliminar_producto():
         return
 
     print(Fore.GREEN + f"Producto '{producto}' con ID '{id}' eliminado exitosamente.")
+
+#def generar_reporte():
+    
+

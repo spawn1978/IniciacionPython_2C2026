@@ -1,4 +1,5 @@
 from conexion import conectar
+from colorama import Fore
 
 def registrar_producto(nombre, descripcion, categoria, cantidad, precio):
     conn = conectar()
@@ -61,11 +62,18 @@ def nombre_actualizado(nuevo_nombre, id):
 
     try:
         cursor = conn.cursor()
+        cursor.execute("SELECT * FROM productos WHERE id = ?", (id,))
+        if cursor.fetchone() is None:
+            raise ValueError(f"No existe el ID del producto: {id}")
+
         cursor.execute("""
             UPDATE productos 
             SET nombre = ? 
             WHERE id = ? """,(nuevo_nombre,id))
         conn.commit()
+    except ValueError as e:
+        print(Fore.RED + str(e))
+        return None
     except Exception as e:
         print(Fore.RED + f"Error al actualizar los productos: {e}")
         return None
@@ -79,11 +87,18 @@ def descripcion_actualizado(nueva_descripcion,id):
 
     try:
         cursor = conn.cursor()
+        cursor.execute("SELECT * FROM productos WHERE id = ?", (id,))
+        if cursor.fetchone() is None:
+            raise ValueError(f"No existe el ID del producto: {id}")
+                
         cursor.execute('''
             UPDATE productos 
             SET descripcion = ? 
             WHERE id = ? ''',(nueva_descripcion,id))
         conn.commit()
+    except ValueError as e:
+        print(Fore.RED + str(e))
+        return None
     except Exception as e:
         print(Fore.RED + f"Error al actualizar los productos: {e}")
         return None
@@ -97,11 +112,18 @@ def categoria_actualizado(nueva_categoria, id):
 
     try:
         cursor = conn.cursor()
+        cursor.execute("SELECT * FROM productos WHERE id = ?", (id,))
+        if cursor.fetchone() is None:
+            raise ValueError(f"No existe el ID del producto: {id}")
+                
         cursor.execute('''
             UPDATE productos 
             SET categoria = ? 
             WHERE id = ? ''', (nueva_categoria, id))
         conn.commit()
+    except ValueError as e:
+            print(Fore.RED + str(e))
+            return None
     except Exception as e:
         print(Fore.RED + f"Error al actualizar los productos: {e}")
         return None
@@ -115,11 +137,18 @@ def cantidad_actualizado(nueva_cantidad, id):
 
     try:
         cursor = conn.cursor()
+        cursor.execute("SELECT * FROM productos WHERE id = ?", (id,))
+        if cursor.fetchone() is None:
+            raise ValueError(f"No existe el ID del producto: {id}")
+
         cursor.execute('''
             UPDATE productos 
             SET cantidad = ? 
             WHERE id = ? ''',(nueva_cantidad, id))
         conn.commit()
+    except ValueError as e:
+        print(Fore.RED + str(e))
+        return None
     except Exception as e:
         print(Fore.RED + f"Error al actualizar los productos: {e}")
         return None
@@ -133,11 +162,18 @@ def precio_actualizado(nuevo_precio, id):
 
     try:
         cursor = conn.cursor()
+        cursor.execute("SELECT * FROM productos WHERE id = ?", (id,))
+        if cursor.fetchone() is None:
+            raise ValueError(f"No existe el ID del producto: {id}")
+        
         cursor.execute('''
             UPDATE productos 
             SET precio = ? 
            WHERE id = ? ''', (nuevo_precio, id))
         conn.commit()
+    except ValueError as e:
+        print(Fore.RED + str(e))
+        return None
     except Exception as e:
         print(Fore.RED + f"Error al actualizar los productos: {e}")
         return None

@@ -21,6 +21,9 @@ def crear_tabla():
         conexion = conectar()
         cursor = conexion.cursor()
         
+        cursor.execute("PRAGMA foreign_keys = ON")
+        
+        # Tabla de productos
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS productos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,6 +34,19 @@ def crear_tabla():
                 precio INTEGER NOT NULL
             )
         ''')
+        
+        # Tabla de ventas
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS ventas (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                producto_id  INTEGER NOT NULL,
+                cantidad INTEGER NOT NULL CHECK (cantidad > 0),
+                precio INTEGER NOT NULL,
+                fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (producto_id) REFERENCES productos(id) ON DELETE RESTRICT
+           )
+        ''')
+        
         conexion.commit()
         print(Fore.GREEN + "Tabla 'productos' creada exitosamente.")
     
@@ -38,3 +54,5 @@ def crear_tabla():
         print(Fore.RED + f"Error al crear la tabla: {e}")
     finally:
         conexion.close()
+
+#def tabla_de_pro
