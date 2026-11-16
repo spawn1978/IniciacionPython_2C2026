@@ -8,7 +8,6 @@ Fecha de Creación: 2026-10-04
 Versión: 1.0.0
 """
 import funciones, funciones_sql, conexion
-#from colorama import Fore, Back, Style, init
 from colorama import Fore, init, Back, Style
 
 init(autoreset=True)
@@ -69,31 +68,31 @@ while True:
                         nuevo_nombre = str(input(Fore.GREEN + "Ingrese el nuevo nombre: "))
                         funciones_sql.nombre_actualizado(nuevo_nombre,id)
  
-                    case "2":
+                    case "2": # Opcion Actualizar Descriopcion
                             print("Actualizar Descripcion")
                             id = int(input(Fore.GREEN + "Ingrese el ID: "))
                             nueva_descripcion = str(input(Fore.GREEN + "Ingrese la nueva descripcion: "))
                             funciones_sql.descripcion_actualizado(nueva_descripcion,id)                                   
                             
-                    case "3":
+                    case "3": # Opcion Actualizar Categoria
                             print("Actualizar Categoria")
                             id = int(input(Fore.GREEN + "Ingrese el ID: "))
                             nueva_categoria = str(input(Fore.GREEN + "Ingrese la nueva categoria: "))
                             funciones_sql.categoria_actualizado(nueva_categoria,id)
                                     
-                    case "4":
+                    case "4": # Opcion Actualizar Cantidad
                             print("Actualizar Cantidad")
                             id = int(input(Fore.GREEN + "Ingrese el ID: "))
                             nueva_cantidad = int(input(Fore.GREEN + "Ingrese la nueva cantidad: "))
                             funciones_sql.cantidad_actualizado(nueva_cantidad,id)
                             
-                    case "5":
+                    case "5": # Opcion Actualizar Precio
                             print("Actualizar Precio")
                             id = int(input(Fore.GREEN + "Ingrese el ID: "))
                             nuevo_precio = int(input(Fore.GREEN + "Ingrese el nuevo precio: "))
                             funciones_sql.precio_actualizado(nuevo_precio,id)
                                     
-                    case "6":
+                    case "6": # Salida del Subsistema
                             print(Fore.GREEN + "Saliendo del submenu de actualizacion...")
                             break
                     case _: # Case default
@@ -117,7 +116,7 @@ while True:
                         + f"Categoria: {categoria} | Cantidad: {cantidad} | Precio: ${precio}"
                     )
                         
-        case "7": 
+        case "7":  # Salida del sistema
             print(Fore.RED + "Saliendo del sistema...")
             break
         case _: # Case default

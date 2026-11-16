@@ -4,7 +4,7 @@ import sqlite3
 
 init(autoreset=True)
 
-# Funcion conectar. Realiza la conexion a la base de datos
+# Abre y devuelve la conexión con la base de datos.
 def conectar():
     try:
         conexion = sqlite3.connect('inventario.db')
@@ -15,7 +15,7 @@ def conectar():
         print(Fore.RED + f"Error al conectar a la base de datos: {e}")
         return None
 
-# Funcion crear_tabla. Crea tabla iniciarl    
+# Crea las tablas necesarias para guardar productos y ventas.
 def crear_tabla():
     try:
         conexion = conectar()
@@ -55,4 +55,3 @@ def crear_tabla():
     finally:
         conexion.close()
 
-#def tabla_de_pro

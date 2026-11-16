@@ -4,7 +4,7 @@ from colorama import Fore, init, Back, Style
 
 init(autoreset=True)
 
-# Funcion agregar_productos
+# Solicita los datos de un producto y los guarda en la base de datos.
 def agregar_productos():
     
     # Ingresar el nombre del producto con validación
@@ -56,7 +56,7 @@ def agregar_productos():
     print(Fore.GREEN + f"Producto '{nombre}' agregado exitosamente.")
     #print(lista)  # Mostrar la lista de productos después de agregar uno nuevo
 
-# Funcion mostrar_producto                    
+# Obtiene y muestra todos los productos registrados.
 def mostrar_productos():
     productos = funciones_sql.listar_producto()
     if productos is None:
@@ -69,7 +69,7 @@ def mostrar_productos():
     for id, nombre, descripcion, categoria, cantidad, precio in productos:
         print(Fore.LIGHTBLUE_EX + f"ID: {id} | Nombre: {nombre} | Descripcion: {descripcion} | Categoria: {categoria} | Cantidad: {cantidad} |  Precio: ${precio}")
 
-# Funcion buscar_producto            
+# Solicita un ID y muestra el producto que coincide.
 def buscar_producto():
     while True:
         try:
@@ -94,26 +94,7 @@ def buscar_producto():
     for id_encontrado, nombre, descripcion, categoria, cantidad, precio in productos:
         print(Fore.GREEN + f"ID: {id_encontrado} | Nombre: {nombre} | Descripcion: {descripcion} | Categoria: {categoria} | Cantidad: {cantidad} | Precio: ${precio}")
 
-"""
-def actualizar_producto():
-    producto_buscado = input(Fore.GREEN + "Ingrese el dato del producto(ID) que desea actualizar: ")
-    
-    productos = funciones_sql.producto_actualizado(producto_buscado)
-    producto_buscado = producto_buscado.upper()
-
-    if productos is None:
-        return
-    if not productos:
-        print(Fore.RED + f"No se encontraron productos con el nombre '{producto_buscado}'.")
-        return
-    
-    print(Fore.GREEN + "\nRESULTADOS DE LA BÚSQUEDA")
-    for id_producto, nombre, descripcion, categoria, cantidad, precio in productos:
-        print(Fore.GREEN + f"ID: {id_producto} | Nombre: {nombre} | Descripcion: {descripcion} | Categoria: {categoria} | Cantidad: {cantidad} | Precio: ${precio}")
-"""
-###########################################
-
-# Funcion eliminar_producto
+# Solicita un ID y elimina el producto correspondiente.
 def eliminar_producto():    
     while True:
         try:
@@ -135,7 +116,5 @@ def eliminar_producto():
         return
 
     print(Fore.GREEN + f"Producto '{producto}' con ID '{id}' eliminado exitosamente.")
-
-#def generar_reporte():
     
 

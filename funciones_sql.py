@@ -1,6 +1,7 @@
 from conexion import conectar
 from colorama import Fore
 
+# Guarda un producto nuevo en la tabla productos.
 def registrar_producto(nombre, descripcion, categoria, cantidad, precio):
     conn = conectar()
     if conn:
@@ -17,6 +18,7 @@ def registrar_producto(nombre, descripcion, categoria, cantidad, precio):
             cursor.close()
             conn.close()
 
+# Devuelve todos los productos ordenados por su ID.
 def listar_producto():
     conn = conectar()
     if conn is None:
@@ -36,6 +38,7 @@ def listar_producto():
     finally:
         conn.close()
         
+# Busca y devuelve el producto que tiene el ID indicado.
 def producto_buscado(id):
     conn = conectar()
     if conn is None:
@@ -54,7 +57,7 @@ def producto_buscado(id):
     finally:
         conn.close()
         
-        
+# Cambia el nombre del producto cuyo ID se recibe.
 def nombre_actualizado(nuevo_nombre, id):
     conn = conectar()
     if conn is None:
@@ -79,7 +82,7 @@ def nombre_actualizado(nuevo_nombre, id):
         return None
     finally:
         conn.close()
-        
+# Cambia la descripción del producto cuyo ID se recibe.
 def descripcion_actualizado(nueva_descripcion,id):
     conn = conectar()
     if conn is None:
@@ -105,6 +108,7 @@ def descripcion_actualizado(nueva_descripcion,id):
     finally:
         conn.close()
 
+# Cambia la categoría del producto cuyo ID se recibe.
 def categoria_actualizado(nueva_categoria, id):
     conn = conectar()
     if conn is None:
@@ -130,6 +134,7 @@ def categoria_actualizado(nueva_categoria, id):
     finally:
         conn.close()
 
+# Cambia la cantidad disponible del producto cuyo ID se recibe.
 def cantidad_actualizado(nueva_cantidad, id):
     conn = conectar()
     if conn is None:
@@ -154,7 +159,7 @@ def cantidad_actualizado(nueva_cantidad, id):
         return None
     finally:
         conn.close()
-        
+# Cambia el precio del producto cuyo ID se recibe.
 def precio_actualizado(nuevo_precio, id):
     conn = conectar()
     if conn is None:
@@ -180,7 +185,7 @@ def precio_actualizado(nuevo_precio, id):
     finally:
         conn.close()
         
-        
+# Elimina el producto indicado por ID y devuelve su nombre.
 def producto_eliminado(producto_buscado):
     conn = conectar()
     if conn is None:
@@ -202,6 +207,7 @@ def producto_eliminado(producto_buscado):
     finally:
         conn.close()
 
+# Devuelve los productos cuya cantidad es igual o menor al mínimo indicado.
 def generar_reporte(cantidad_minima):
     conn = conectar()
     if conn is None:
