@@ -106,7 +106,16 @@ while True:
                                     
         case "6":
             # Generar reporte
-            funciones.generar_reporte()
+            cantidad_minima = int(input(Fore.GREEN + "Ingrese la cantidad minima para generar el reporte: "))
+            reporte = funciones_sql.generar_reporte(cantidad_minima)
+            if reporte:
+                print(Fore.LIGHTBLUE_EX + "\nREPORTE DE PRODUCTOS")
+                for id_producto, nombre, descripcion, categoria, cantidad, precio in reporte:
+                    print(
+                        Fore.LIGHTBLUE_EX
+                        + f"ID: {id_producto} | Nombre: {nombre} | Descripcion: {descripcion} | "
+                        + f"Categoria: {categoria} | Cantidad: {cantidad} | Precio: ${precio}"
+                    )
                         
         case "7": 
             print(Fore.RED + "Saliendo del sistema...")

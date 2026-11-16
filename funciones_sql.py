@@ -201,3 +201,32 @@ def producto_eliminado(producto_buscado):
         return None
     finally:
         conn.close()
+
+def generar_reporte(cantidad_minima):
+    conn = conectar()
+    if conn is None:
+        return None
+    
+    try:
+        cursor = conn.cursor()
+        cantidad_minima = int(cantidad_minima)
+        cursor.execute(
+            "SELECT id, nombre, descripcion, categoria, cantidad, precio "
+            "FROM productos WHERE cantidad <= ? ORDER BY id",
+            (cantidad_minima,),
+        )
+        productos = cursor.fetchall()
+        if not productos:
+            print(Fore.RED + f"No existen productos con una cantidad igual o inferior a la indicada: {cantidad_minima}")
+            return []
+        return productos
+    except ValueError as e:
+        print(Fore.RED + "La cantidad mínima debe ser un número entero.")
+        return None
+    except Exception as e:
+        print(Fore.RED + f"Error al generar el reporte: {e}")
+        return None
+    finally:
+        conn.close()
+        
+
