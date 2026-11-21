@@ -8,7 +8,7 @@ Aplicación de consola escrita en Python para registrar, consultar, actualizar y
 - `colorama` para mostrar mensajes con colores.
 - SQLite, incluido en la biblioteca estándar de Python.
 
-Instalá `colorama` si todavía no está disponible en el entorno:
+Instalar `colorama` si todavía no está disponible en el entorno:
 
 ```bash
 python3 -m pip install colorama
@@ -21,8 +21,6 @@ Desde la carpeta del proyecto, ejecutá:
 ```bash
 python3 main.py
 ```
-
-Al iniciar, la aplicación crea las tablas `productos` y `ventas` si todavía no existen.
 
 ## Menú principal
 
@@ -85,7 +83,6 @@ La tabla `ventas` también se crea al iniciar:
 | `precio` | `INTEGER` | Precio registrado para la venta |
 | `fecha` | `TIMESTAMP` | Fecha y hora de creación; por defecto, la fecha actual |
 
-`ventas.producto_id` referencia `productos.id`. La aplicación todavía no incluye opciones en el menú para registrar o consultar ventas.
 
 ## Archivos y funciones
 

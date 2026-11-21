@@ -25,7 +25,8 @@ while True:
     print("4. Eliminar producto")
     print("5. Actualizar producto")
     print("6. Generar Reporte")
-    print("7. Salir")
+    print("7. Registrar venta")
+    print("8. Salir")
     
 
     opcion = input("Seleccione una opción: ".strip())  
@@ -115,8 +116,18 @@ while True:
                         + f"ID: {id_producto} | Nombre: {nombre} | Descripcion: {descripcion} | "
                         + f"Categoria: {categoria} | Cantidad: {cantidad} | Precio: ${precio}"
                     )
+                    
+        case "7":
+            try:
+                id_producto = int(input("Ingrese el ID del producto: "))
+                cantidad = int(input("Ingrese la cantidad a vender: "))
+            except ValueError:
+                print(Fore.RED + "El ID y la cantidad deben ser números enteros.")
+            else:
+                funciones_sql.registrar_venta(id_producto, cantidad)
+            
                         
-        case "7":  # Salida del sistema
+        case "8":  # Salida del sistema
             print(Fore.RED + "Saliendo del sistema...")
             break
         case _: # Case default
