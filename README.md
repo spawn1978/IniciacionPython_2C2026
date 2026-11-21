@@ -30,9 +30,10 @@ python3 main.py
 4. Eliminar producto por ID
 5. Actualizar producto
 6. Generar reporte de stock
-7. Salir
+7. Registrar venta
+8. Salir
 
-La opción 5 abre un submenú para actualizar el nombre, la descripción, la categoría, la cantidad o el precio. La opción 6 solicita una cantidad mínima y muestra los productos cuya cantidad disponible es igual o inferior a ese valor.
+La opción 5 abre un submenú para actualizar el nombre, la descripción, la categoría, la cantidad o el precio. La opción 6 solicita una cantidad mínima y muestra los productos cuya cantidad disponible es igual o inferior a ese valor. La opción 7 solicita el ID del producto y la cantidad a vender; ambos valores deben ser números enteros.
 
 ## Operaciones
 
@@ -59,6 +60,10 @@ Permite modificar un campo del producto seleccionado por ID. Antes de actualizar
 ### Generar reporte
 
 Solicita un número entero y lista los productos con una cantidad disponible menor o igual a ese número. Si no hay productos que cumplan la condición, muestra un mensaje indicando que el reporte no tiene resultados.
+
+### Registrar venta
+
+Solicita el ID del producto y la cantidad a vender. La cantidad debe ser un entero mayor que cero, el producto debe existir y debe contar con stock suficiente. Si la operación es válida, descuenta las unidades del inventario y registra la venta con el precio vigente del producto. El descuento y el registro se confirman juntos; si ocurre un error, se revierte la transacción para evitar cambios parciales. La función informa el motivo del error y devuelve `True` si la venta se registra o `False` si no se completa.
 
 ## Base de datos
 
@@ -111,8 +116,9 @@ Estas funciones realizan consultas parametrizadas a SQLite y cierran la conexió
 - `precio_actualizado(nuevo_precio, id)`: actualiza el precio si el ID existe.
 - `producto_eliminado(producto_buscado)`: elimina el producto indicado por ID y devuelve su nombre.
 - `generar_reporte(cantidad_minima)`: devuelve los productos cuya cantidad es menor o igual al valor indicado.
+- `registrar_venta(id_producto, cantidad)`: valida el producto y el stock, descuenta la cantidad y registra la venta junto con el precio vigente dentro de una transacción. Devuelve `True` al completar la operación o `False` si la revierte por un error.
 
-Las funciones de consulta devuelven `None` si no pueden conectarse o si ocurre un error. El reporte devuelve una lista vacía cuando la consulta se ejecuta correctamente pero no encuentra productos.
+Las funciones de consulta devuelven `None` si no pueden conectarse o si ocurre un error. El reporte devuelve una lista vacía cuando la consulta se ejecuta correctamente pero no encuentra productos. `registrar_venta()` devuelve `None` si no puede establecer una conexión.
 
 ### `conexion.py`
 
