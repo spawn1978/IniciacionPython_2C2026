@@ -3,3 +3,5 @@ productos.db
 .venv
 __pycache__
 test_sql
+inventario.db-wal
+inventario.db-shm
